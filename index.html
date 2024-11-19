@@ -181,7 +181,7 @@
         <source src="./static/videos/teaser.mp4"
                 type="video/mp4">
       </video> -->
-      <img src="./static/images/teaser.png" alt="teaser" width="100%">
+      <img src="./static/images/teaser_v4.png" alt="teaser" width="100%">
     
       <h2 class="subtitle has-text-centered">
         GAGS learns a 3D Gaussian field associated with semantic features, which enables accurate open-vocabulary 3D visual grounding in the scene.
@@ -368,13 +368,13 @@
         <div class="colum">
           <h2 class="title is-3">Pipeline</h2>
   
-          <img src="./static/images/pipelinev2.png" alt="Pipeline" width="100%">
+          <img src="./static/images/pipelinev7_main.png" alt="Pipeline" width="100%">
           <br>
           <br>
           <div class="content has-text-justified">
             <p>
-              <strong>GAGS Pipeline.</strong> GAGS combines a granularity-invariant sampling & embedding module for multi-view consistent CLIP features extracting 
-              with a granularity-blend language field reconstruction module, selecting appropriate feature scales for each object.
+              <strong>GAGS pipeline.</strong> Given a set of images with camera poses, GAGS first uses 3D Gaussian Splatting to reconstruct the scene's geometric representation, 
+              then utilizes it for granularity-aware segmentation and CLIP feature distillation. The finally output 3D feature field supports open-vocabulary queries.
             </p>
           </div>
 
@@ -386,21 +386,23 @@
           <br>
           <div class="content has-text-justified">
             <p>
-              <strong>Granularity-invariant sampling method.</strong> For each input image, our method calculate prompt points for each patch, 
-              and convert local Gaussian density into a discrete probability distribution to guide sampling.
+              <strong>Granularity-aware segmentation.</strong> For each input image, our method calculates the number of prompt points for each patch, 
+              converts the local Gaussian density into a discrete probability distribution to guide prompt point sampling, 
+              and further directs SAM to generate multi-view consistent masks.
             </p>
           </div>
 
           <br>
           <br>
 
-          <img src="./static/images/intro_3.png" alt="Pipeline" width="100%">
+          <img src="./static/images/intro_3_v5.png" alt="Pipeline" width="100%">
           <br>
           <br>
           <div class="content has-text-justified">
             <p>
-              <strong>Granularity-blend reconstruction.</strong> Leveraging the inherent consistency of 3D Gaussian splatting, 
-              our method facilitates the stable and accurate learning of object features.
+              <strong>Granularity-aware distillation.</strong> leveraging the inherent consistency of 3D Gaussian splatting, 
+              Our method performs granularity-aware feature distillation, 
+              enhancing the stability and accuracy of learned object features
             </p>
           </div>
 
@@ -455,9 +457,21 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-full-width">
         <h2 class="title is-3">Visualization</h2>
+        
+        <div class="colum">
 
-        <img src="./static/images/main_comparison_v3_1.png" alt="Visualization" width="100%">
-        <img src="./static/images/main_comparison_v3_2.png" alt="Visualization" width="100%">
+          <img src="./static/images/main_comparison_v5_1.png" alt="Visualization" width="100%">
+          <img src="./static/images/main_comparison_v5_2.png" alt="Visualization" width="100%">
+          <br>
+          <br>
+          <div class="content has-text-justified">
+            <p>
+              <strong>Relevance visualization result.</strong> GAGS encourages the distillation of multi-view consistent CLIP features into the Gaussian field, 
+              effectively reducing noise from conflicting views and significantly improving localization and segmentation tasks.
+            </p>
+          </div>
+
+        </div>
         <!-- <br>
         <br>
         <h2 class="title is-4">More results</h2>
@@ -520,16 +534,16 @@
 
         <br>
         <br>
-
         <div class="colum">
 
-          <img src="./static/images/ablation_blend.jpg" alt="Pipeline" width="100%">
+          <img src="./static/images/ablation_full_v2_14pt.png" alt="Pipeline" width="100%">
           <br>
-
+          <br>
           <div class="content has-text-justified">
             <p>
-              <strong>Ablation result.</strong> GAGS selects the optimal scale for each object, 
-              reducing the influence of irrelevant semantic scale features on feature distilling.
+              <strong>Ablation result.</strong> The proposed Granularity-aware Segmentation (<strong>GaS</strong>) can mitigate noise issues from over-segmentation of nearby objects and low-texture areas, 
+              as well as under-segmentation of distant objects, 
+              while Granularity-aware Distillation (<strong>GaD</strong>) significantly improves segmentation accuracy by learning multi-view consistent features at the appropriate granularity for each object.
             </p>
           </div>
         </div>
